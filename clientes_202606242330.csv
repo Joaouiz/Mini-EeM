@@ -1,0 +1,5 @@
+"id","nome","telefone","email","valor","vencimento","status"
+1,João Silva,"41999999999",joao@email.com,150.00,2026-06-15,PENDENTE
+3,Maria Souza,"41988888888",maria@email.com,220.50,2026-07-10,PENDENTE
+4,Carlos Lima,"41977777777",carlos@email.com,89.90,2026-07-05,PAGO
+5,Ana Costa,"41966666666",ana@email.com,340.00,2026-07-20,PENDENTE
