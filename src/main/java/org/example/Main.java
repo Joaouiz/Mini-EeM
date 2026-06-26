@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.example.model.Cliente;
 
 public class Main {
     public static void main(String[] args) {
