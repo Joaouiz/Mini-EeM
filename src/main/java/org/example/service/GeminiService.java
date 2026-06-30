@@ -1,5 +1,6 @@
 package org.example.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.model.Cliente;
@@ -16,9 +17,9 @@ public class GeminiService {
 
     private final ObjectMapper mapper = new ObjectMapper();
     PromptBuilder promptBuilder = new PromptBuilder();
-    private static final String apiKey = "MeuPauDeOculos";
+    private static final String API_KEY = "pintoMurcho";
     private final HttpClient client = HttpClient.newHttpClient();
-    private static final String url = "https://jsonplaceholder.typicode.com/posts";
+    private static final String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
     public GeminiService(){
         mapper.registerModule(new JavaTimeModule());
@@ -31,13 +32,13 @@ public class GeminiService {
 
         HttpRequest requestHttp = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .header("Content-Type", "application/json")
+                .header("x-goog-api-key", API_KEY)
                 .POST(HttpRequest.BodyPublishers.ofString(jsonGemini))
                 .build();
 
         HttpResponse<String> response = client.send(requestHttp, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.statusCode());
-        return response.body();
+        JsonNode root = mapper.readTree(response.body());
+        return root.get("candidates").get(0).get("content").get("parts").get(0).get("text").asText();
     }
 }
